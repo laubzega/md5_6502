@@ -172,8 +172,8 @@ _md5_next_block_fastcall:
 	jmp md5_skip_ptr
 	
 	
-; Calculate hash of a block of up to 64-bytes. All message blocks should have
-; 64 bytes except for the last one.
+; Calculate hash of a block of up to 64-bytes. All message blocks MUST have
+; 64 bytes except for the last one (which may be shorter).
 ;---------------------------------------------------------------------------
 _md5_next_block:
 	sta data_ptr
