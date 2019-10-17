@@ -67,6 +67,8 @@ _md5_hash = _a_0
 .endmacro
 
 
+; Call this first before starting new hash computation.
+; -----------------------------------------------------
 _md5_init:
 	ldx #15
 init_const:
@@ -142,6 +144,7 @@ no_carry2:
 	sta _buffer + 58
 	rts
 
+; Call _after_ hashing the final message block.
 _md5_finalize:
 	lda final_block_size
 	cmp #56
@@ -156,9 +159,11 @@ extra_block:
 	sta _buffer,y
 no_1_bit:
 	jsr pad_buffer
-
 	jmp append
 
+
+; Same as _md5_next_block, but using _fastcall_ argument passing convention.
+;---------------------------------------------------------------------------
 _md5_next_block_fastcall:
 	sta data_ptr
 	stx data_ptr + 1
@@ -167,6 +172,9 @@ _md5_next_block_fastcall:
 	jmp md5_skip_ptr
 	
 	
+; Calculate hash of a block of up to 64-bytes. All message blocks should have
+; 64 bytes except for the last one.
+;---------------------------------------------------------------------------
 _md5_next_block:
 	sta data_ptr
 	stx data_ptr + 1
@@ -199,13 +207,17 @@ size_wont_fit:
 
 
 	
-
 _md5:
-
-	ldx #15
+	ldx #3
 init_loop:
 	lda _a_0,x
 	sta A0,x
+	lda _b_0,x
+	sta B0,x
+	lda _c_0,x
+	sta C0,x
+	lda _d_0,x
+	sta D0,x
 	dex
 	bpl init_loop
 

@@ -5,7 +5,6 @@ void md5_init(void);
 void __fastcall__ md5_next_block_fastcall(unsigned char size, unsigned char *data);
 void md5_finalize(void);
 extern unsigned char md5_hash[16];
-void __fastcall__ exo_init_decruncher(unsigned char *src);
 
 unsigned char data[64]= "123456789012345678901234567890123456789012345678901234567890123";
 unsigned char ref[16]={0x5e, 0x43, 0xd5, 0x50, 0xcf, 0x52, 0xd2, 0x9f,
@@ -50,7 +49,7 @@ int main()
     t_total = clock() - t_start;
     secs = t_total / CLOCKS_PER_SEC;
     tens = 100 * (t_total - secs * CLOCKS_PER_SEC) / CLOCKS_PER_SEC;
-    printf("\nTime: %d.%02d s (%ld bytes/s)\n", secs, tens, CLOCKS_PER_SEC * (64L * blocks) / t_total );
+    printf("\nTime: %d.%02d s (%ld bytes/s)\n", secs, tens, CLOCKS_PER_SEC * (64L * blocks) / t_total);
 
     return 0;
 }
