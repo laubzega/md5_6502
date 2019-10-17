@@ -13,17 +13,5 @@ md5.prg: md5.s main.c
 test: md5
 	$(SIM65) -v -c $< || (echo "FAILED TEST: $$?"; exit 1) && echo "ALL PASS"
 
-
-
-
-dd4_payload.bin: dd4.bin checksum.sh
-	./checksum.sh <$< >$@
-
-dd4.o: dd4.s debug_via_ora.asm gootzer_gcr_decode.asm
-	$(CA65) -g --cpu 6502x $<
-
-dd4.bin: dd4.o 1541.cfg
-	$(LD65) -C 1541.cfg $< -o $@ -v -Ln dd4.lbl
-
 clean:
 	rm -f md5 md5.prg md5.o tests.o main.o
