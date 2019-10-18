@@ -20,13 +20,16 @@ In order to calculate MD5 hash of a message:
 
 See `tests.s` for examples.
 
+### Limitations
+
+Currently messages of up to 2MiB are supported. This should not be a
+problem, but if the need arises, the limit can be increased easily.
 
 ### Testing
 
 Sure. Run `make test`. If it fails, you optimized too much.
 
-
-### Did you say Commodore c64?
+### Did you say Commodore 64?
 
 Yes. `make md5.prg` and have fun benchmarking.
 

@@ -189,7 +189,7 @@ md5_skip_ptr:
 	jsr copy_block_to_buffer
 append_1_bit:
 	ldy final_block_size
-	lda #$80	; add extra "1" bit right after the data
+	lda #$80		; add extra "1" bit right after the data
 	sta _buffer,y
 padding:
 	jsr pad_buffer
@@ -208,7 +208,6 @@ no_carry:
 size_wont_fit:
 
 
-	
 _md5:
 	ldx #3
 init_loop:
@@ -247,7 +246,7 @@ loop_16_31:
 	eor C0 + I
 	sta F0 + I
 	.endrep
-	
+
 	jsr sum_F
 	inx
 	cpx #32
@@ -260,7 +259,7 @@ loop_32_47:
 	eor D0 + I
 	sta F0 + I
 	.endrep
-	
+
 	jsr sum_F
 	inx
 	cpx #48
@@ -274,7 +273,7 @@ loop_48_63:
 	eor C0 + I
 	sta F0 + I
 	.endrep
-	
+
 	jsr sum_F
 	inx
 
